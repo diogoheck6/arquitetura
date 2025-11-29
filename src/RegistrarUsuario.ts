@@ -1,9 +1,10 @@
-import BancoEmMemoria from "./BancoEmMemoria"
+import Colecao from "./Colecao"
 import InverterSenha from "./InverterSenha"
 
 export default class RegistrarUsuario {
-	private banco = new BancoEmMemoria()
 	private inverterSenha = new InverterSenha()
+
+	constructor(private colecao: Colecao) {}
 
 	executar(nome: string, email: string, senha: string) {
 		const senhaCripto = this.inverterSenha.criptografar(senha)
@@ -15,7 +16,7 @@ export default class RegistrarUsuario {
 			senha: senhaCripto,
 		}
 
-		this.banco.inserir(usuario)
+		this.colecao.inserir(usuario)
 		return usuario
 	}
 }
