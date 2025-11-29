@@ -1,13 +1,11 @@
 import Colecao from "./Colecao"
-import InverterSenha from "./InverterSenha"
+import ProvedorCriptografia from "./ProvedorCriptografia"
 
 export default class RegistrarUsuario {
-	private inverterSenha = new InverterSenha()
-
-	constructor(private colecao: Colecao) {}
+	constructor(private colecao: Colecao, private provedorCripto: ProvedorCriptografia) {}
 
 	executar(nome: string, email: string, senha: string) {
-		const senhaCripto = this.inverterSenha.criptografar(senha)
+		const senhaCripto = this.provedorCripto.criptografar(senha)
 
 		const usuario = {
 			id: Math.random(),
