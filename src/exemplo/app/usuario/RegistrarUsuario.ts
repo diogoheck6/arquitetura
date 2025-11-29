@@ -1,10 +1,10 @@
-import Colecao from "../portas/Colecao"
-import ProvedorCriptografia from "../portas/ProvedorCriptografia"
-import Usuario from "./Usuario"
+import ProvedorCriptografia from './ProvedorCriptografia'
+import ColecaoUsuario from './ColecaoUsuario'
+import Usuario from './Usuario'
 
 export default class RegistrarUsuario {
 	constructor(
-		private colecao: Colecao,
+		private colecao: ColecaoUsuario,
 		private provedorCripto: ProvedorCriptografia
 	) {}
 

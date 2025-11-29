@@ -1,5 +1,5 @@
-import ProvedorCriptografia from "../../app/portas/ProvedorCriptografia"
-import bcript from "bcrypt"
+import ProvedorCriptografia from '../../app/usuario/ProvedorCriptografia'
+import bcript from 'bcrypt'
 
 export default class CriptoReal implements ProvedorCriptografia {
 	criptografar(senha: string): string {

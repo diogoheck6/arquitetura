@@ -1,8 +1,8 @@
-import ProvedorCriptografia from "../../app/portas/ProvedorCriptografia"
+import ProvedorCriptografia from '../../app/usuario/ProvedorCriptografia'
 
 export default class SenhaComEspaco implements ProvedorCriptografia {
 	criptografar(senha: string): string {
-		return senha.split("").join(" ")
+		return senha.split('').join(' ')
 	}
 
 	comparar(senha: string, senhaCriptografada: string): boolean {
