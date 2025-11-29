@@ -1,4 +1,4 @@
-import Colecao from "./Colecao"
+import Colecao from "../../app/portas/Colecao"
 
 export default class BancoEmMemoria implements Colecao {
 	private static itens: any[] = []

@@ -1,5 +1,5 @@
-import Colecao from "./Colecao"
-import ProvedorCriptografia from "./ProvedorCriptografia"
+import Colecao from "../portas/Colecao"
+import ProvedorCriptografia from "../portas/ProvedorCriptografia"
 
 export default class RegistrarUsuario {
 	constructor(private colecao: Colecao, private provedorCripto: ProvedorCriptografia) {}
