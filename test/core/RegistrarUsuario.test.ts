@@ -1,9 +1,9 @@
-import UsuarioEmMemoria from '../src/adapters/db/UsuarioEmMemoria'
-import CriptoReal from '../src/adapters/auth/CriptoReal'
-import InverterSenha from '../src/adapters/auth/InverterSenha'
-import RegistrarUsuario from '../src/core/usuario/RegistrarUsuario'
-import SenhaComEspaco from '../src/adapters/auth/SenhaComEspaco'
-import ColecaoUsuarioDB from '../src/adapters/db/knex/ColecaoUsuarioDB'
+import UsuarioEmMemoria from '../../src/adapters/db/UsuarioEmMemoria'
+import CriptoReal from '../../src/adapters/auth/CriptoReal'
+import InverterSenha from '../../src/adapters/auth/InverterSenha'
+import RegistrarUsuario from '../../src/core/usuario/RegistrarUsuario'
+import SenhaComEspaco from '../../src/adapters/auth/SenhaComEspaco'
+import ColecaoUsuarioDB from '../../src/adapters/db/knex/ColecaoUsuarioDB'
 
 test('Deve registrar um usuário invertendo a senha', async () => {
 	const colecao = new UsuarioEmMemoria()
