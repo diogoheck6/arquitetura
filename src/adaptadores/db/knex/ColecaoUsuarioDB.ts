@@ -1,6 +1,6 @@
-import ColecaoUsuario from '../../../app/usuario/ColecaoUsuario'
+import ColecaoUsuario from '../../../core/usuario/ColecaoUsuario'
 import conexao from './conexao'
-import Usuario from '../../../app/usuario/Usuario'
+import Usuario from '../../../core/usuario/Usuario'
 
 export default class ColecaoUsuarioDB implements ColecaoUsuario {
 	async inserir(usuario: Usuario): Promise<void> {

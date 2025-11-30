@@ -1,19 +1,9 @@
-import UsuarioEmMemoria from '../src/exemplo/adaptadores/db/UsuarioEmMemoria'
-import CriptoReal from '../src/exemplo/adaptadores/auth/CriptoReal'
-import InverterSenha from '../src/exemplo/adaptadores/auth/InverterSenha'
-import RegistrarUsuario from '../src/exemplo/app/usuario/RegistrarUsuario'
-import SenhaComEspaco from '../src/exemplo/adaptadores/auth/SenhaComEspaco'
-import ColecaoUsuarioDB from '../src/exemplo/adaptadores/db/knex/ColecaoUsuarioDB'
-
-// import path from 'path'
-// import dotenv from 'dotenv'
-
-// // Carrega o .env da raiz do projeto
-// dotenv.config({
-// 	path: path.resolve(__dirname, '../.env'),
-// })
-
-// console.log('DB_URL NO TESTE:', process.env.DB_URL)
+import UsuarioEmMemoria from '../src/adaptadores/db/UsuarioEmMemoria'
+import CriptoReal from '../src/adaptadores/auth/CriptoReal'
+import InverterSenha from '../src/adaptadores/auth/InverterSenha'
+import RegistrarUsuario from '../src/core/usuario/RegistrarUsuario'
+import SenhaComEspaco from '../src/adaptadores/auth/SenhaComEspaco'
+import ColecaoUsuarioDB from '../src/adaptadores/db/knex/ColecaoUsuarioDB'
 
 test('Deve registrar um usuário invertendo a senha', async () => {
 	const colecao = new UsuarioEmMemoria()
