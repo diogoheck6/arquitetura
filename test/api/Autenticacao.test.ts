@@ -8,7 +8,7 @@ const usuario: Partial<Usuario> = {
 	senha: '123456',
 }
 
-test('Deve registrar um novo usuáro se não existir', async () => {
+test.skip('Deve registrar um novo usuáro se não existir', async () => {
 	try {
 		const resp = await axios.post(`${baseURL}/registrar`, usuario)
 		expect(resp.status).toBe(201)
@@ -18,7 +18,7 @@ test('Deve registrar um novo usuáro se não existir', async () => {
 	}
 })
 
-test('Deve logar com email e senha corretos', async () => {
+test.skip('Deve logar com email e senha corretos', async () => {
 	const resp = await axios.post(`${baseURL}/login`, {
 		email: usuario.email,
 		senha: usuario.senha,

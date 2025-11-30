@@ -11,6 +11,7 @@ import RegistrarUsuarioController from './controllers/RegistrarUsuarioController
 import JwtAdapter from './adapters/auth/JwtAdaptar'
 import SalvarTransacao from './core/transacao/SalvarTransacao'
 import SalvarTransacaoController from './controllers/SalvarTransacaoController'
+import UsuarioMiddleware from './controllers/UsuarioMiddleware'
 
 const app = express()
 const porta = process.env.PORTA ?? 3001
@@ -24,11 +25,11 @@ app.listen(porta, () => {
 
 const provedorToken = new JwtAdapter(process.env.JWT_SECRET!)
 const provedorCripto = new BcryptAdapter()
-const colecaoUsuarioDB = new ColecaoUsuarioDB()
+const colecaoUsuario = new ColecaoUsuarioDB()
 
-const registrarUsuario = new RegistrarUsuario(colecaoUsuarioDB, provedorCripto)
+const registrarUsuario = new RegistrarUsuario(colecaoUsuario, provedorCripto)
 const loginUsuario = new LoginUsuario(
-	colecaoUsuarioDB,
+	colecaoUsuario,
 	provedorCripto,
 	provedorToken
 )
@@ -37,5 +38,7 @@ new RegistrarUsuarioController(app, registrarUsuario)
 new LoginUsuarioController(app, loginUsuario)
 
 // -------------------------------- Rotas Autenticadas
+const usuarioMiddleware = UsuarioMiddleware(colecaoUsuario, provedorToken)
+
 const salvarTransacao = new SalvarTransacao()
-new SalvarTransacaoController(app, salvarTransacao)
+new SalvarTransacaoController(app, salvarTransacao, usuarioMiddleware)

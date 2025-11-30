@@ -4,16 +4,17 @@ import InverterSenha from '../../src/adapters/auth/InverterSenha'
 import RegistrarUsuario from '../../src/core/usuario/RegistrarUsuario'
 import SenhaComEspaco from '../../src/adapters/auth/SenhaComEspaco'
 import ColecaoUsuarioDB from '../../src/adapters/db/knex/ColecaoUsuarioDB'
+import usuarios from '../data/usuarios'
 
 test('Deve registrar um usuário invertendo a senha', async () => {
 	const colecao = new UsuarioEmMemoria()
 	const provedorCripto = new InverterSenha()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
-	const usuario = await casoDeUso.executar(
-		'João da Silva da Silva',
-		'jjjoao@zmail.com.br',
-		'123456'
-	)
+	const usuario = await casoDeUso.executar({
+		nome: usuarios.completo.nome,
+		email: usuarios.completo.email,
+		senha: usuarios.completo.senha!,
+	})
 
 	expect(usuario).toHaveProperty('id')
 	expect(usuario.nome).toBe('João da Silva da Silva')
@@ -24,11 +25,11 @@ test('Deve registrar um usuário com senha com espaços', async () => {
 	const colecao = new UsuarioEmMemoria()
 	const provedorCripto = new SenhaComEspaco()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
-	const usuario = await casoDeUso.executar(
-		'João da Silva da Silva',
-		'jjjoao@zmail.com.br',
-		'123456'
-	)
+	const usuario = await casoDeUso.executar({
+		nome: usuarios.completo.nome,
+		email: usuarios.completo.email,
+		senha: usuarios.completo.senha!,
+	})
 
 	expect(usuario).toHaveProperty('id')
 	expect(usuario.nome).toBe('João da Silva da Silva')
@@ -39,11 +40,11 @@ test('Deve registrar um usuário com senha criptografada', async () => {
 	const colecao = new UsuarioEmMemoria()
 	const provedorCripto = new BcryptAdapter()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
-	const usuario = await casoDeUso.executar(
-		'João da Silva da Silva',
-		'jjjoao@zmail.com.br',
-		'123456'
-	)
+	const usuario = await casoDeUso.executar({
+		nome: usuarios.completo.nome,
+		email: usuarios.completo.email,
+		senha: usuarios.completo.senha!,
+	})
 
 	expect(usuario).toHaveProperty('id')
 	expect(usuario.nome).toBe('João da Silva da Silva')
@@ -55,12 +56,12 @@ test('Deve registrar erro ao cadastrar um usuário já cadastrado', async () => 
 	const provedorCripto = new BcryptAdapter()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
 
-	const nome = 'João da Silva da Silva'
-	const email = 'jjjoao@zmail.com.br'
-	const senha = '123456'
+	const nome = usuarios.completo.nome
+	const email = usuarios.completo.email
+	const senha = usuarios.completo.senha!
 
-	await casoDeUso.executar(nome, email, senha)
-	const exe = async () => await casoDeUso.executar(nome, email, senha)
+	await casoDeUso.executar({ nome, email, senha })
+	const exe = async () => await casoDeUso.executar({ nome, email, senha })
 
 	await expect(exe).rejects.toThrow('Usuário já existe.')
 })
@@ -70,11 +71,11 @@ test.skip('Deve registrar um usuário no banco real', async () => {
 	const provedorCripto = new BcryptAdapter()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
 
-	const usuario = await casoDeUso.executar(
-		'João da Silva da Silva',
-		'jjjoao@zmail.com.br',
-		'123456'
-	)
+	const usuario = await casoDeUso.executar({
+		nome: usuarios.completo.nome,
+		email: usuarios.completo.email,
+		senha: usuarios.completo.senha!,
+	})
 
 	console.log('DB_URL NO TESTE:', process.env.DB_URL)
 

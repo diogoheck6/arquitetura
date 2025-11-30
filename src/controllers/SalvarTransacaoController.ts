@@ -2,7 +2,11 @@ import { Express, Request, Response } from 'express'
 import SalvarTransacao from '../core/transacao/SalvarTransacao'
 
 export default class SalvarTransacaoController {
-	constructor(private servidor: Express, private casoDeUso: SalvarTransacao) {
+	constructor(
+		private servidor: Express,
+		private casoDeUso: SalvarTransacao,
+		...middleware: any[]
+	) {
 		const fn = async (req: Request, res: Response) => {
 			try {
 				const resposta = await this.casoDeUso.executar()
@@ -11,6 +15,6 @@ export default class SalvarTransacaoController {
 				res.status(400).send(err.message)
 			}
 		}
-		servidor.post('/transacao', fn)
+		servidor.post('/transacao', middleware, fn)
 	}
 }
