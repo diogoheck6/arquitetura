@@ -9,6 +9,6 @@ export default class JwtAdapter implements ProvedorToken {
 	}
 
 	validar(token: string): string | object {
-		return jwt.verify(token.replace('Bearer ', ''), this.segredo)
+		return jwt.verify(token, this.segredo)
 	}
 }
