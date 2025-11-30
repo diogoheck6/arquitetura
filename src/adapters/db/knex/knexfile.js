@@ -1,11 +1,7 @@
-// src/exemplo/adapters/db/knex/knexfile.js (ajusta extensão se for .ts)
-const path = require('path')
 const dotenv = require('dotenv')
+dotenv.config({ path: '../../../../.env' })
 
-// Carrega o .env SEM depender do cwd
-dotenv.config({
-	path: path.resolve(__dirname, '../../../../../.env'),
-})
+console.log('DB_URL NO KNEXFILE:', process.env.DB_URL)
 
 module.exports = {
 	client: 'pg',

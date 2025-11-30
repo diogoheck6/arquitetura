@@ -7,9 +7,9 @@
 		"build": "tsc",
 		"dev": "ts-node-dev --respawn --transpile-only src/index.ts",
 		"test": "jest",
-		"migrate:make": "knex migrate:make --knexfile ./src/exemplo/adapters/db/knex/knexfile.ts --knexpath ./src/adapters/db",
-		"migrate:down": "knex migrate:rollback --knexfile ./src/exemplo/adapters/db/knex/knexfile.ts",
-		"migrate:up": "knex migrate:latest --knexfile ./src/exemplo/adapters/db/knex/knexfile.ts"
+		"migrate:make": "knex migrate:make --knexfile ./src/adapters/db/knex/knexfile.ts --knexpath ./src/adapters/db/knex",
+		"migrate:down": "knex migrate:rollback --knexfile ./src/adapters/db/knex/knexfile.ts",
+		"migrate:up": "knex migrate:latest --knexfile ./src/adapters/db/knex/knexfile.ts"
 	},
 	"keywords": [],
 	"author": "Diogo Rodrigues",
