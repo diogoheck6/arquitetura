@@ -2,12 +2,13 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import ColecaoUsuarioDB from './adapters/db/knex/ColecaoUsuarioDB'
-import CriptoReal from './adapters/auth/CriptoReal'
+import BcryptAdapter from './adapters/auth/BcryptAdapter'
 import express from 'express'
 import LoginUsuario from './core/usuario/LoginUsuario'
 import LoginUsuarioController from './controllers/LoginUsuarioController'
 import RegistrarUsuario from './core/usuario/RegistrarUsuario'
 import RegistrarUsuarioController from './controllers/RegistrarUsuarioController'
+import JwtAdapter from './adapters/auth/JwtAdaptar'
 
 const app = express()
 const porta = process.env.PORTA ?? 3001
@@ -19,11 +20,16 @@ app.listen(porta, () => {
 
 // -------------------------------- Rotas Abertas
 
-const provedorCripto = new CriptoReal()
+const provedorToken = new JwtAdapter(process.env.JWT_SECRET!)
+const provedorCripto = new BcryptAdapter()
 const colecaoUsuarioDB = new ColecaoUsuarioDB()
 
 const registrarUsuario = new RegistrarUsuario(colecaoUsuarioDB, provedorCripto)
-const loginUsuario = new LoginUsuario(colecaoUsuarioDB, provedorCripto)
+const loginUsuario = new LoginUsuario(
+	colecaoUsuarioDB,
+	provedorCripto,
+	provedorToken
+)
 
 new RegistrarUsuarioController(app, registrarUsuario)
 new LoginUsuarioController(app, loginUsuario)

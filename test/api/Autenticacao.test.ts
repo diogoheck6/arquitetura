@@ -27,5 +27,6 @@ test('Deve logar com email e senha corretos', async () => {
 	expect(resp.data.usuario.nome).toBe(usuario.nome)
 	expect(resp.data.usuario.email).toBe(usuario.email)
 	expect(resp.data.usuario.senha).toBeUndefined()
+	console.log(resp.data.token)
 	expect(resp.data).toHaveProperty('token')
 })

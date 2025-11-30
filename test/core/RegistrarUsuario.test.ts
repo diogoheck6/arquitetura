@@ -1,5 +1,5 @@
 import UsuarioEmMemoria from '../../src/adapters/db/UsuarioEmMemoria'
-import CriptoReal from '../../src/adapters/auth/CriptoReal'
+import BcryptAdapter from '../../src/adapters/auth/BcryptAdapter'
 import InverterSenha from '../../src/adapters/auth/InverterSenha'
 import RegistrarUsuario from '../../src/core/usuario/RegistrarUsuario'
 import SenhaComEspaco from '../../src/adapters/auth/SenhaComEspaco'
@@ -37,7 +37,7 @@ test('Deve registrar um usuário com senha com espaços', async () => {
 
 test('Deve registrar um usuário com senha criptografada', async () => {
 	const colecao = new UsuarioEmMemoria()
-	const provedorCripto = new CriptoReal()
+	const provedorCripto = new BcryptAdapter()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
 	const usuario = await casoDeUso.executar(
 		'João da Silva da Silva',
@@ -52,7 +52,7 @@ test('Deve registrar um usuário com senha criptografada', async () => {
 
 test('Deve registrar erro ao cadastrar um usuário já cadastrado', async () => {
 	const colecao = new UsuarioEmMemoria()
-	const provedorCripto = new CriptoReal()
+	const provedorCripto = new BcryptAdapter()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
 
 	const nome = 'João da Silva da Silva'
@@ -67,7 +67,7 @@ test('Deve registrar erro ao cadastrar um usuário já cadastrado', async () => 
 
 test.skip('Deve registrar um usuário no banco real', async () => {
 	const colecao = new ColecaoUsuarioDB()
-	const provedorCripto = new CriptoReal()
+	const provedorCripto = new BcryptAdapter()
 	const casoDeUso = new RegistrarUsuario(colecao, provedorCripto)
 
 	const usuario = await casoDeUso.executar(
