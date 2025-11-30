@@ -8,11 +8,11 @@ export default class RegistrarUsuarioController {
 	) {
 		servidor.post('/registrar', async (req, res) => {
 			try {
-				await casoDeUso.executar(
-					req.body.nome,
-					req.body.email,
-					req.body.senha
-				)
+				await casoDeUso.executar({
+					nome: req.body.nome,
+					email: req.body.email,
+					senha: req.body.senha,
+				})
 				res.status(201).send()
 			} catch (err: any) {
 				res.status(400).send(err.message)
