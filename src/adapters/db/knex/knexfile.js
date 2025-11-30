@@ -1,4 +1,4 @@
-// src/exemplo/adaptadores/db/knex/knexfile.js (ajusta extensão se for .ts)
+// src/exemplo/adapters/db/knex/knexfile.js (ajusta extensão se for .ts)
 const path = require('path')
 const dotenv = require('dotenv')
 
