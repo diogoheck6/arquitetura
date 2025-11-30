@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import ColecaoUsuarioDB from './adapters/db/knex/ColecaoUsuarioDB'
+import ColecaoUsuarioDB from './adapters/db/ColecaoUsuarioDB'
 import BcryptAdapter from './adapters/auth/BcryptAdapter'
 import express from 'express'
 import LoginUsuario from './core/usuario/LoginUsuario'

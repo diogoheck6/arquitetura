@@ -1,5 +1,5 @@
 const dotenv = require('dotenv')
-dotenv.config({ path: '../../../../.env' })
+dotenv.config({ path: '../../../.env' })
 
 console.log('DB_URL NO KNEXFILE:', process.env.DB_URL)
 
