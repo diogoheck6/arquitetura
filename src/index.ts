@@ -12,6 +12,9 @@ import JwtAdapter from './adapters/auth/JwtAdaptar'
 import SalvarTransacao from './core/transacao/SalvarTransacao'
 import SalvarTransacaoController from './controllers/SalvarTransacaoController'
 import UsuarioMiddleware from './controllers/UsuarioMiddleware'
+import ColecaoTransacaoDB from './adapters/db/ColecaoTransacaoDB'
+import ExtratoMensal from './core/transacao/ExtratoMensal'
+import ExtratoMensalController from './controllers/ExtratoMensalController'
 
 const app = express()
 const porta = process.env.PORTA ?? 3001
@@ -40,5 +43,10 @@ new LoginUsuarioController(app, loginUsuario)
 // -------------------------------- Rotas Autenticadas
 const usuarioMiddleware = UsuarioMiddleware(colecaoUsuario, provedorToken)
 
-const salvarTransacao = new SalvarTransacao()
+const colecaoTransacao = new ColecaoTransacaoDB()
+
+const salvarTransacao = new SalvarTransacao(colecaoTransacao)
+const extratoMensal = new ExtratoMensal(colecaoTransacao)
+
 new SalvarTransacaoController(app, salvarTransacao, usuarioMiddleware)
+new ExtratoMensalController(app, extratoMensal, usuarioMiddleware)

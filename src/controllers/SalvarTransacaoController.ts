@@ -1,5 +1,6 @@
 import { Express, Request, Response } from 'express'
 import SalvarTransacao from '../core/transacao/SalvarTransacao'
+import Usuario from '../core/usuario/Usuario'
 
 export default class SalvarTransacaoController {
 	constructor(
@@ -9,12 +10,23 @@ export default class SalvarTransacaoController {
 	) {
 		const fn = async (req: Request, res: Response) => {
 			try {
-				const resposta = await this.casoDeUso.executar()
-				res.status(200).json(resposta)
+				const transacao = {
+					descricao: req.body.descricao,
+					valor: +req.body.valor,
+					vencimento: new Date(req.body.vencimento),
+					idUsuario: req.body.idUsuario,
+				}
+				await casoDeUso.executar({
+					transacao: transacao,
+					id: req.params.id,
+					usuario: (req as any).usuario as Usuario,
+				})
+				res.status(200).send()
 			} catch (err: any) {
-				res.status(400).send(err.message)
+				res.status(400).json(err.message)
 			}
 		}
-		servidor.post('/transacao', middleware, fn)
+		servidor.post('/transacao', ...middleware, fn)
+		servidor.post('/transacao/:id', ...middleware, fn)
 	}
 }
